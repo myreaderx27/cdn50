@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="ahrefs-site-verification" content="b21134b1225ebf149e1266990fcc7b2bb3d9812fb4c9cdb1db0e5b103b2be6d2">
+    <link rel="profile" href="http://gmpg.org/xfn/11"/>
+    <link rel="shortcut icon" href="https://www.sqlservercentral.com/wp-content/uploads/2019/04/favicon.ico" />
+    <link rel="pingback" href="https://www.sqlservercentral.com/xmlrpc.php"/>
+    <title>An Introduction to Azure Cosmos DB &ndash; SQLServerCentral</title>
+
+            <meta name="wp:id" content="3797071" />
+        
+<!-- This site is optimized with the Yoast SEO plugin v11.6 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Introduction Azure Cosmos DB is Microsoft&#039;s globally distributed, multi-model platform-as-a-service (PaaS) database. Any web, mobile, gaming, and IoT"/>
+<link rel="canonical" href="https://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db" />
+<meta property="og:locale" content="en_GB" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="An Introduction to Azure Cosmos DB &ndash; SQLServerCentral" />
+<meta property="og:description" content="Introduction Azure Cosmos DB is Microsoft&#039;s globally distributed, multi-model platform-as-a-service (PaaS) database. Any web, mobile, gaming, and IoT" />
+<meta property="og:url" content="https://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db" />
+<meta property="og:site_name" content="SQLServerCentral" />
+<meta property="article:section" content="Azure Cosmos DB" />
+<meta property="og:image" content="https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos1-1024x576.png" />
+<meta property="og:image:secure_url" content="https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos1-1024x576.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="Introduction Azure Cosmos DB is Microsoft&#039;s globally distributed, multi-model platform-as-a-service (PaaS) database. Any web, mobile, gaming, and IoT" />
+<meta name="twitter:title" content="An Introduction to Azure Cosmos DB &ndash; SQLServerCentral" />
+<meta name="twitter:site" content="@sqlservercentrl" />
+<meta name="twitter:image" content="https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos1-1024x576.png" />
+<meta name="twitter:creator" content="@sqlservercentrl" />
+<script type='application/ld+json' class='yoast-schema-graph yoast-schema-graph--main'>{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.sqlservercentral.com/#organization","name":"SQLServerCentral","url":"https://www.sqlservercentral.com/","sameAs":["https://twitter.com/sqlservercentrl"],"logo":{"@type":"ImageObject","@id":"https://www.sqlservercentral.com/#logo","url":"https://www.sqlservercentral.com/wp-content/uploads/2019/05/ssc-logo.png","width":60,"height":53,"caption":"SQLServerCentral"},"image":{"@id":"https://www.sqlservercentral.com/#logo"}},{"@type":"WebSite","@id":"https://www.sqlservercentral.com/#website","url":"https://www.sqlservercentral.com/","name":"SQLServerCentral","publisher":{"@id":"https://www.sqlservercentral.com/#organization"},"potentialAction":{"@type":"SearchAction","target":"https://www.sqlservercentral.com/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"ImageObject","@id":"https://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db#primaryimage","url":"https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos1.png","width":1366,"height":768},{"@type":"WebPage","@id":"https://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db#webpage","url":"https://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db","inLanguage":"en-GB","name":"An Introduction to Azure Cosmos DB &ndash; SQLServerCentral","isPartOf":{"@id":"https://www.sqlservercentral.com/#website"},"primaryImageOfPage":{"@id":"https://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db#primaryimage"},"datePublished":"2020-11-16T00:00:35+00:00","dateModified":"2020-11-11T19:54:48+00:00","description":"Introduction Azure Cosmos DB is Microsoft's globally distributed, multi-model platform-as-a-service (PaaS) database. Any web, mobile, gaming, and IoT"}]}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//cdn.rawgit.com' />
+<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+<link rel='dns-prefetch' href='//www.sqlservercentral.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="SQLServerCentral &raquo; Feed" href="https://www.sqlservercentral.com/feed" />
+<link rel="alternate" type="application/rss+xml" title="SQLServerCentral &raquo; Comments Feed" href="https://www.sqlservercentral.com/comments/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.sqlservercentral.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.1.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<!-- managing ads with Advanced Ads – https://wpadvancedads.com/ --><script>
+					advanced_ads_ready=function(){var fns=[],listener,doc=typeof document==="object"&&document,hack=doc&&doc.documentElement.doScroll,domContentLoaded="DOMContentLoaded",loaded=doc&&(hack?/^loaded|^c/:/^loaded|^i|^c/).test(doc.readyState);if(!loaded&&doc){listener=function(){doc.removeEventListener(domContentLoaded,listener);window.removeEventListener("load",listener);loaded=1;while(listener=fns.shift())listener()};doc.addEventListener(domContentLoaded,listener);window.addEventListener("load",listener)}return function(fn){loaded?setTimeout(fn,0):fns.push(fn)}}();
+			</script><style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='wp-block-library-css'  href='https://www.sqlservercentral.com/wp-includes/css/dist/block-library/style.min.css?ver=5.1.1' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='wp-block-library-css'  href='https://www.sqlservercentral.com/wp-includes/css/dist/block-library/style.min.css?ver=5.1.1' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='ssc-widgets-mini-teaser-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-widgets/css/mini-teaser.min.css?ver=2020-06-03' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='ssc-widgets-mini-teaser-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-widgets/css/mini-teaser.min.css?ver=2020-06-03' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='ssc-bbp-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-bbp/css/ssc-bbp.min.css?ver=2020-06-03' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='ssc-bbp-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-bbp/css/ssc-bbp.min.css?ver=2020-06-03' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='ssc-briefcase-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-briefcase/css/ssc-briefcase.min.css?ver=2020-06-03' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='ssc-briefcase-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-briefcase/css/ssc-briefcase.min.css?ver=2020-06-03' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='ssc-contributions-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-contributions/css/contributions.min.css?ver=2020-06-03' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='ssc-contributions-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-contributions/css/contributions.min.css?ver=2020-06-03' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='ssc-leaderboard-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-leaderboard/css/leaderboard.min.css?ver=2020-06-03' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='ssc-leaderboard-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-leaderboard/css/leaderboard.min.css?ver=2020-06-03' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='ssc-related-forum-topics-top-comments-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-related-forum-topics/css/top-comments.min.css?ver=2020-06-03' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='ssc-related-forum-topics-top-comments-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-related-forum-topics/css/top-comments.min.css?ver=2020-06-03' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='ssc-social-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-social/css/icons.min.css?ver=2020-06-03' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='ssc-social-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-social/css/icons.min.css?ver=2020-06-03' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='ssc-star-ratings-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-star-ratings/css/ssc-star-ratings.min.css?ver=2020-06-03' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='ssc-star-ratings-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-star-ratings/css/ssc-star-ratings.min.css?ver=2020-06-03' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='ssc-syntax-highlighting-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-syntax-highlighting/css/syntax-highlighting.min.css?ver=2020-06-03' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='ssc-syntax-highlighting-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-syntax-highlighting/css/syntax-highlighting.min.css?ver=2020-06-03' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='ssc-syntax-highlighting-legacy-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-syntax-highlighting/css/legacy.min.css?ver=2020-06-03' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='ssc-syntax-highlighting-legacy-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-syntax-highlighting/css/legacy.min.css?ver=2020-06-03' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='featherlight-css-css'  href='https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css?ver=5.1.1' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='featherlight-css-css'  href='https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css?ver=5.1.1' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='ssc-lightbox-css-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-lightbox/css/ssc-lightbox.min.css?ver=5.1.1' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='ssc-lightbox-css-css'  href='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-lightbox/css/ssc-lightbox.min.css?ver=5.1.1' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='bbp-default-css'  href='https://www.sqlservercentral.com/wp-content/plugins/bbpress/templates/default/css/bbpress.css?ver=2.5.14-6684' type='text/css' media='screen' />
+<noscript><link rel='stylesheet' id='bbp-default-css'  href='https://www.sqlservercentral.com/wp-content/plugins/bbpress/templates/default/css/bbpress.css?ver=2.5.14-6684' type='text/css' media='screen' /></noscript>
+
+<link rel='stylesheet' id='bbp-ssc-css'  href='https://www.sqlservercentral.com/wp-content/themes/ssc-twentyeighteen/bbpress/bbpress.min.css?ver=2.5.14-6684' type='text/css' media='screen' />
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='gglcptch-css'  href='https://www.sqlservercentral.com/wp-content/plugins/google-captcha/css/gglcptch.css?ver=1.39' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='gglcptch-css'  href='https://www.sqlservercentral.com/wp-content/plugins/google-captcha/css/gglcptch.css?ver=1.39' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='hm_bbpui-css'  href='https://www.sqlservercentral.com/wp-content/plugins/image-upload-for-bbpress/css/bbp-image-upload.css?ver=5.1.1' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='hm_bbpui-css'  href='https://www.sqlservercentral.com/wp-content/plugins/image-upload-for-bbpress/css/bbp-image-upload.css?ver=5.1.1' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='searchandfilter-css'  href='https://www.sqlservercentral.com/wp-content/plugins/search-filter/style.css?ver=1' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='searchandfilter-css'  href='https://www.sqlservercentral.com/wp-content/plugins/search-filter/style.css?ver=1' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='ssc2018-googlefonts-css'  href='//fonts.googleapis.com/css?family=Open+Sans%3A400%2C600&#038;ver=5.1.1' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='ssc2018-googlefonts-css'  href='//fonts.googleapis.com/css?family=Open+Sans%3A400%2C600&#038;ver=5.1.1' type='text/css' media='all' /></noscript>
+
+<link rel='stylesheet' id='ssc2018-stylesheet-css'  href='https://www.sqlservercentral.com/wp-content/themes/ssc-twentyeighteen/css/style.css?ver=2020-06-03' type='text/css' media='all' />
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='d4p-bbattachments-css-css'  href='https://www.sqlservercentral.com/wp-content/plugins/gd-bbpress-attachments/css/front.css?ver=3.1_b2302_free' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='d4p-bbattachments-css-css'  href='https://www.sqlservercentral.com/wp-content/plugins/gd-bbpress-attachments/css/front.css?ver=3.1_b2302_free' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='simple-favorites-css'  href='https://www.sqlservercentral.com/wp-content/plugins/favorites/assets/css/favorites.css?ver=2.3.1' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='simple-favorites-css'  href='https://www.sqlservercentral.com/wp-content/plugins/favorites/assets/css/favorites.css?ver=2.3.1' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='wp-user-avatar-css'  href='https://www.sqlservercentral.com/wp-content/plugins/wp-user-avatar-pro/assets/css/wp-user-avatar.css?ver=4.1.8' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='wp-user-avatar-css'  href='https://www.sqlservercentral.com/wp-content/plugins/wp-user-avatar-pro/assets/css/wp-user-avatar.css?ver=4.1.8' type='text/css' media='all' /></noscript>
+
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='jcrop-css'  href='https://www.sqlservercentral.com/wp-includes/js/jcrop/jquery.Jcrop.min.css?ver=0.9.12' type='text/css' media='all' />
+<noscript><link rel='stylesheet' id='jcrop-css'  href='https://www.sqlservercentral.com/wp-includes/js/jcrop/jquery.Jcrop.min.css?ver=0.9.12' type='text/css' media='all' /></noscript>
+
+<script type='text/javascript' src='https://www.sqlservercentral.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://www.sqlservercentral.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' defer src='https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js?ver=5.1.1'></script>
+<script type='text/javascript' defer src='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-lightbox/js/ssc-lightbox.min.js?ver=5.1.1'></script>
+<script type='text/javascript' defer src='https://www.sqlservercentral.com/wp-content/plugins/image-upload-for-bbpress/js/bbp-image-upload.js?ver=5.1.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var favorites_data = {"ajaxurl":"https:\/\/www.sqlservercentral.com\/wp-admin\/admin-ajax.php","nonce":"17dbad58b5","favorite":"Add to briefcase <i class=\"sf-icon-star-empty\"><\/i>","favorited":"Remove from briefcase <i class=\"sf-icon-star-full\"><\/i>","includecount":"","indicate_loading":"","loading_text":"Loading","loading_image":"","loading_image_active":"","loading_image_preload":"","cache_enabled":"1","button_options":{"button_type":"custom","custom_colors":false,"box_shadow":false,"include_count":false,"default":{"background_default":false,"border_default":false,"text_default":false,"icon_default":false,"count_default":false},"active":{"background_active":false,"border_active":false,"text_active":false,"icon_active":false,"count_active":false}},"authentication_modal_content":"<p>Please login to add favorites.<\/p><p><a href=\"#\" data-favorites-modal-close>Dismiss this notice<\/a><\/p>","authentication_redirect":"","dev_mode":"","logged_in":"","user_id":"0","authentication_redirect_url":"https:\/\/www.sqlservercentral.com\/wp-login.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' defer src='https://www.sqlservercentral.com/wp-content/plugins/favorites/assets/js/favorites.min.js?ver=2.3.1'></script>
+<script type='text/javascript' src='https://www.sqlservercentral.com/wp-includes/js/jcrop/jquery.Jcrop.min.js?ver=0.9.12'></script>
+<script type='text/javascript' defer src='https://www.sqlservercentral.com/wp-content/plugins/wp-user-avatar-pro/assets/js/webcam.js?ver=4.1.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wpua_imgloader_vars = {"url":"https:\/\/www.sqlservercentral.com\/wp-admin\/admin-ajax.php","WPUA_URL":"https:\/\/www.sqlservercentral.com\/wp-content\/plugins\/wp-user-avatar-pro\/","WPUA_MEDIA":"false","wpua_webcam":"true","wpua_string":{"file_type_error":"File Type is not valid.","file_type_error_description":"Valid File Type is jpeg, png and gif.","file_size_error":"File Size is too big","file_size_error_description":"File uploading limits:  Size 8.00 MB","no_image":"Oops! Seems you didn't select any image.","no_image_instruction":"It's easy. Click within dotted area.","upload_image":"Upload Image","media_uploader":"Media Uploader","drop_instruction":"Drop image here or click to upload.","control_instruction":"Select your image, crop and save it.","close":"Close","save":"Save Image","capture_image":"Capture Image","webcam_on":"Use Camera","mediamanager_on_title":"Media Manager is turned ON.","mediamanager_on_instruction":"Click within dotted area to choose image from media manager"},"restriction":{"strickly_resize":true,"max_file_size":"8388608","max_file_width":0,"max_file_height":0,"wp_user_avatar_thumbnail_w":false,"wp_user_avatar_thumbnail_h":false}};
+/* ]]> */
+</script>
+<script type='text/javascript' defer src='https://www.sqlservercentral.com/wp-content/plugins/wp-user-avatar-pro/assets/js/wpua-imgloader.js?ver=4.1.8'></script>
+<link rel='https://api.w.org/' href='https://www.sqlservercentral.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.sqlservercentral.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.sqlservercentral.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.1.1" /><meta name="projectnami:version" content="2.1.1" />
+<link rel='shortlink' href='https://www.sqlservercentral.com/?p=3797071' />
+<link rel="alternate" type="application/json+oembed" href="https://www.sqlservercentral.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.sqlservercentral.com%2Farticles%2Fan-introduction-to-azure-cosmos-db" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.sqlservercentral.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.sqlservercentral.com%2Farticles%2Fan-introduction-to-azure-cosmos-db&#038;format=xml" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90206-6"></script>
+<script>
+    const sites = [
+        'www.red-gate.com',
+        'www.sqlservercentral.com',
+        'documentation.red-gate.com',
+        'sqlmonitormetrics.red-gate.com'
+    ];
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());  
+     gtag('config', 'UA-90206-6');
+     gtag('config', 'UA-90206-169', { 'linker': { 'domains': sites } });
+</script><script type="text/javascript">
+            /* <![CDATA[ */
+            var gdbbPressAttachmentsInit = {
+                max_files: 10            };
+            /* ]]> */
+        </script>			<style>
+			.avatar_overlays p  {
+ 				background: rgba(0, 0, 0, );
+ 				color: ;
+				}
+			.wpuap_tooltip:hover .wpuap_tooltip_content {
+		    display: inline;
+		    position: absolute;
+		    color: ;
+		    border: 1px solid ;
+		    background: 			}
+
+			.avatar_container [class^=icon-],
+			.avatar_container [class*=" icon-"] {
+			    color:  !important;
+			}
+
+			#ci-modal,.ci_controls {
+			    background-color:  !important;
+			}
+						</style>
+		</head>
+
+<body class="ssc_article-template-default single single-ssc_article postid-3797071" itemscope itemtype="http://schema.org/WebPage" >
+
+<div id="page" class="hfeed site">
+
+    <!-- HEADER -->
+    <header class="site-header band header--primary">
+        <nav>
+            <div class="header--primary__nav__inner">
+                <a href="https://www.sqlservercentral.com/" title="SQLServerCentral" rel="home" class="header--primary__app-logo-container"><img src="https://www.sqlservercentral.com/wp-content/themes/ssc-twentyeighteen/images/header/ssc-logo.svg" alt="" /></a>
+                <a href="https://www.sqlservercentral.com/" title="SQLServerCentral" rel="home" class="header--primary__app-name-container "><img src="https://www.sqlservercentral.com/wp-content/themes/ssc-twentyeighteen/images/header/ssc.svg" alt="" /></a>
+                <ul class="js-dropdown hide-on-medium">
+                    <li id="menu-item-7" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-7"><a href="/articles">Articles</a></li>
+<li id="menu-item-8" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8"><a href="/editorials">Editorials</a></li>
+<li id="menu-item-9" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9"><a href="/stairways">Stairways</a></li>
+<li id="menu-item-10" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-10"><a href="/forums">Forums</a>
+<ul class="sub-menu">
+	<li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-16"><a title="Top level for all forums" href="/forums">Forums home</a></li>
+	<li id="menu-item-3052410" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3052410"><a title="Threads listed in reverse order by the most recent reply" href="/forums/view/topics-freshness">Active threads</a></li>
+	<li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18"><a title="Threads listed in reverse order by the creation date" href="/forums/view/latest-topics">Latest topics</a></li>
+	<li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-17"><a title="Most replies in the last 24 hours" href="/forums/view/popular">Most popular</a></li>
+	<li id="menu-item-3644583" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3644583"><a href="/totalscores#leaderboard-forum">Leaderboard</a></li>
+</ul>
+</li>
+<li id="menu-item-11" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11"><a href="/scripts">Scripts</a></li>
+<li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12"><a href="/questions">QotD</a></li>
+<li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13"><a href="/books">Books</a></li>
+<li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14"><a href="https://ask.sqlservercentral.com/">Ask SSC</a></li>
+<li id="menu-item-15" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="/blogs">Blogs</a></li>
+                </ul>
+
+                <span class="header--primary__site-tools">
+                    <ul>
+                        <li class="hide-on-medium"><a href="/contributions"><span class="icon--edit"></span>Write for us</a></li>
+                        <li class="hide-on-max show-on-medium"><a href="/search" class="header--primary__icon icon--search" title="Search"></a></li>
+                        <li class="hide-on-max show-on-large"><a href="" class="header--primary__icon header--primary__menu-button">Menu</a></li>
+                    </ul>
+                    <ul class="js-dropdown dropdown hide-on-small">
+                                                    <li><a href="https://www.sqlservercentral.com/wp-login.php?action=register">Register</a></li>
+                            <li><a href="https://www.sqlservercentral.com/wp-login.php?redirect_to=https%3A%2F%2Fwww.sqlservercentral.com%2Farticles%2Fan-introduction-to-azure-cosmos-db">Login</a></li>
+                                            </ul>
+                </span>
+            </div>
+
+            <ul class="header--primary__menu--mobile js-dropdown">
+                <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-7"><a href="/articles">Articles</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8"><a href="/editorials">Editorials</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9"><a href="/stairways">Stairways</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-10"><a href="/forums">Forums</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-16"><a title="Top level for all forums" href="/forums">Forums home</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3052410"><a title="Threads listed in reverse order by the most recent reply" href="/forums/view/topics-freshness">Active threads</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18"><a title="Threads listed in reverse order by the creation date" href="/forums/view/latest-topics">Latest topics</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-17"><a title="Most replies in the last 24 hours" href="/forums/view/popular">Most popular</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3644583"><a href="/totalscores#leaderboard-forum">Leaderboard</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11"><a href="/scripts">Scripts</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12"><a href="/questions">QotD</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13"><a href="/books">Books</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14"><a href="https://ask.sqlservercentral.com/">Ask SSC</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="/blogs">Blogs</a></li>
+
+                                <li class="menu-item"><a href="/contributions">Write for us</a></li>
+
+                                    <li><a href="https://www.sqlservercentral.com/wp-login.php?action=register">Register</a></li>
+                    <li><a href="https://www.sqlservercentral.com/wp-login.php?redirect_to=https%3A%2F%2Fwww.sqlservercentral.com%2Farticles%2Fan-introduction-to-azure-cosmos-db">Login</a></li>
+                            </ul>
+        </nav>
+    </header>
+    <!-- /HEADER -->
+
+    <!-- SECONDARY NAV -->
+    <nav class="background-color--grey--1 border-bottom border-color--grey--3 nav-secondary">
+        <div class="band__inner-container border-left border-right border-color--grey--3 padded--none">
+            <form class="search display--inline border-left border-right border-color--grey--3 padded-right--tight float-right" action="https://www.sqlservercentral.com/" method="get">
+                <input type="text" name="s" placeholder="Search..." value=""/>
+                <input type="image" src="https://www.sqlservercentral.com/wp-content/themes/ssc-twentyeighteen/images/nav-secondary/search-icon.svg"/>
+            </form>
+        </div>
+    </nav>
+    <!-- /SECONDARY NAV -->
+
+    
+    
+<!-- single.php -->
+    <!-- template-parts/content-single.php -->
+<div class="band">
+    <div class="band__inner-container padded--tight--small grid" itemscope itemtype="http://schema.org/Article" datePublished="">
+
+        <div itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+            <div itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop="url" content="https://www.sqlservercentral.com/wp-content/uploads/2019/05/ssc-logo.png">
+                <meta itemprop="width" content="60"> <meta itemprop="height" content="53">
+            </div>
+            <meta itemprop="name" content="SQLServerCentral.com">
+        </div>
+
+        <meta itemprop="mainEntityOfPage" content="https://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db">
+
+        <div class="grid__col grid__col--span-2-of-12 hide-on-small content-single-sidebar-left">
+            
+    <div class="thumbnail-container">
+        <a href="https://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db" class="link-image flex flex-align--center flex-justify--center"><img src="https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-post-thumbnails/images/technical-article.svg" alt="" /></a>
+    </div>
+<img class="hidden" itemprop="image" src="https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-post-thumbnails/images/technical-article.png" alt="" />        </div>
+
+        <div class="grid__col grid__col--span-8-of-12">
+            <div class="padded-h spaced-bottom padded-h--none--small">
+                <h1 class="text--bold" itemprop="name">An Introduction to Azure Cosmos DB</h1>
+                <meta itemprop="headline" content="An Introduction to Azure Cosmos DB">
+                <div class="meta spaced-bottom--tight">
+                    <p class="gamma">
+                        <a href="https://www.sqlservercentral.com/author/sucharita1das" itemprop="url"><span itemprop="author" itemtype="http://schema.org/Person"><span itemprop="name">Sucharita Das</span></span></a>,
+                        <span itemprop="datePublished"><span itemprop="dateCreated">2020-11-16</span></span>
+                        <meta itemprop="dateModified" content="November 11, 2020">
+                        <br />
+                    </p>
+                </div>
+
+                <div class="content" itemprop="articleBody">
+                    <h2>Introduction</h2>
+<p>Azure Cosmos DB is Microsoft's globally distributed, multi-model platform-as-a-service (PaaS) database. Any web, mobile, gaming, and IoT application that needs to handle massive amounts of structured, semi-structured and unstructured data may use Azure Cosmos DB. Guaranteed high availability, high throughput, low latency, and tunable consistency help in reading and writing data at a global scale with near-real response time.</p>
+<p>Azure Cosmos DB is a NoSQL database and have many advantages over the relational database.</p>
+<h2>NoSQL database</h2>
+<p>NoSQL databases are also referred to as nonrelational databases. They can handle huge volumes of rapidly changing, unstructured data in different ways than a relational (SQL) database with rows and tables. Most nonrelational, high-performance databases are also called “not only SQL”  as these databases can also handle highly structured data. They are not limited to any fixed data models.</p>
+<p>The four most common types of NoSQL databases are:</p>
+<ul>
+<li class="text-heading3"><strong>Key-value:</strong> Key-value stores pair keys and values using a hash table.</li>
+<li class="text-heading3"><strong>Document:</strong> extends the concept of the key-value database by organizing entire documents into groups called collections. They support nested key-value pairs and allow queries on any attribute within a document.</li>
+<li class="text-heading3"><strong>Columnar:</strong> efficiently stores data and query across rows of sparse data and are advantageous when querying specific columns in the database.</li>
+<li class="text-heading3"><strong>Graph:</strong> uses a model based on nodes and edges to represent interconnected data and offer simplified storage and navigation through complex relationships.</li>
+</ul>
+<h2>Azure Cosmos DB Account</h2>
+<p>To start working with Azure Cosmos DB, I need to initially create an Azure Cosmos account in an Azure subscription. The Azure Cosmos account is the fundamental unit of global distribution and high availability. The account contains a unique DNS name to identify and manage it. For globally distributing the data and throughput across multiple Azure regions, new regions can be added or existing regions can be removed from the account at any time.</p>
+<p>A single Azure Cosmos account can virtually manage unlimited amount of data and provisioned throughput. I need to create databases, containers and items under the Cosmos DB account for data population and management.</p>
+<h2>Creating a Database and Querying Data</h2>
+<p>I will discuss the step-by-step process for populating data and then querying in a Azure Cosmos DB account.</p>
+<h3>Step 1: create the account</h3>
+<p>I click on the link, <a href="https://azure.microsoft.com/try/cosmosdb/">https://azure.microsoft.com/try/cosmosdb/</a>, to create an Azure Cosmos DB account free for 30 days. No Azure subscription is required for this account. To create the account, first I need to select an API and data model from the five available options. I select the SQL API and press the 'Create' button.</p>
+<p>API stands for Application Programming Interface. Programmers use the APIs to write programs to access the data. Cosmos DB supports 5 APIs:</p>
+<ul>
+<li><strong>SQL API:</strong> enables to identify and retrieve documents using SELECT statements. This API should be used for any new application. Other APIs are there to support existing applications.</li>
+<li><strong>Table API:</strong> Data in Table Storage can be migrated to Cosmos DB and the existing application can be used to access the data using Table API.</li>
+<li><strong>MongoDB API:</strong> Data in a MongoDB database can be migrated to Azure Cosmos DB and the existing MongoDB application can be used to access the data using MongoDB API.</li>
+<li><strong>Cassandra API:</strong> provides a Cassandra-like programmatic interface for Cosmos DB. The primary purpose of the Cassandra API is to enable quick migration of Cassandra databases and applications to Cosmos DB.</li>
+<li><strong>Gremlin API:</strong> implements a graph database interface to Cosmos DB. A graph is a collection of data objects and directed relationships. Gremlin API enables to perform graph queries over data in Cosmos DB.</li>
+</ul>
+<p>As you can see, each of these are available in a separate database that we can create.</p>
+<p><img class="alignnone size-large wp-image-3799585" src="data:image/gif;base64,R0lGODlhAQABAPAAAPLy8v///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos1-1024x576.png" data-lazy-load alt="" width="1024" height="576" data-srcset="https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos1-1024x576.png 1024w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos1-300x169.png 300w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos1-768x432.png 768w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos1-128x72.png 128w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos1.png 1366w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>&nbsp;</p>
+<h3>Step 2: Create the SQL API Database</h3>
+<p>I click Create next to the SQL API. The Azure Cosmos DB account is created, and the free account should be valid for the next 30 days. I click on the link 'Open in the Azure Portal' to open the Cosmos DB in the Azure portal and start working with my database.</p>
+<p><img class="alignnone size-large wp-image-3799586" src="data:image/gif;base64,R0lGODlhAQABAPAAAPLy8v///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos2-1024x576.png" data-lazy-load alt="" width="1024" height="576" data-srcset="https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos2-1024x576.png 1024w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos2-300x169.png 300w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos2-768x432.png 768w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos2-128x72.png 128w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos2.png 1366w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>&nbsp;</p>
+<h3>Step 3: Azure Cosmos DB account in the Home page</h3>
+<p>Now, I am in the Home page of the Azure Portal. The Cosmos DB account is available in the Resource list. A default name is given for the Cosmos DB account. I click on it.</p>
+<p><img class="alignnone size-large wp-image-3799588" src="data:image/gif;base64,R0lGODlhAQABAPAAAPLy8v///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos3-1024x576.png" data-lazy-load alt="" width="1024" height="576" data-srcset="https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos3-1024x576.png 1024w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos3-300x169.png 300w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos3-768x432.png 768w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos3-128x72.png 128w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/cosmos3.png 1366w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<h3></h3>
+<h3>Step 4: Create the database and the container</h3>
+<p>I go to the Data Explorer tab for the Cosmos DB account. Here, I click on New Container link. A new window opens for adding a container. I have to provide a few details here about the database and the container.</p>
+<p><strong>Item:</strong> It can represent a document in a collection, a row in a table, or a node or edge in a graph depending on the API selected for creation of the Cosmos DB account.</p>
+<p><strong>Container:</strong> This is a schema-agnostic container of items. Different items in a container may have different schemas. A container is horizontally partitioned and then replicated across multiple regions. Items are automatically grouped into logical partitions and then are distributed across physical partitions, based on the partition key. The throughput on a container is evenly distributed across the physical partitions.</p>
+<p><strong>Partitioning:</strong> items in a container are divided into distinct subsets called logical partitions based on the value of a partition key associated with each item in a container. All the items in a logical partition have the same partition key value. Physical partitions are an internal implementation of the system. One or more logical partitions can be mapped to a single physical partition.</p>
+<p><strong>Partition Key: </strong>it has two components: partition key path and the partition key value. Selection of the partition key is an important design decision. Partition key should be a property whose value does not change and values have a wide possible range.</p>
+<p><strong>Database:</strong> This is similar to a namespace. I may create one or multiple databases under the Azure Cosmos DB account. There can be multiple containers inside a database.</p>
+<p><strong>Throughput:</strong> It is required for the containers to run writes, reads, updates and deletes on the items. Throughput of a database is shared across all the containers in the database. Unit for throughput is request units per second (RU/s). A single request unit, one RU, is equal to the approximate cost of performing a single GET request on a 1-KB document using a document's ID. Request units are estimated based on many factors like item size, item indexing, query patterns etc.</p>
+<p>I create a new database here. I can provide the name of an existing database also in the Database Id field.</p>
+<p>The next field is throughput. I set the option as manual and put the RU/s value as 400. Then, I have to give the name of the new container in the Container Id field.</p>
+<p>&nbsp;</p>
+<p><img class="alignnone size-large wp-image-3799589" src="data:image/gif;base64,R0lGODlhAQABAPAAAPLy8v///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://www.sqlservercentral.com/wp-content/uploads/2020/10/container1-1024x576.png" data-lazy-load alt="" width="1024" height="576" data-srcset="https://www.sqlservercentral.com/wp-content/uploads/2020/10/container1-1024x576.png 1024w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/container1-300x169.png 300w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/container1-768x432.png 768w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/container1-128x72.png 128w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/container1.png 1366w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>I give a name for the container in the Container Id field. Then I select the partition key as a field named id for the items to be added in the container. I keep the other fields with the default values for now and press the OK button.</p>
+<p><img class="alignnone size-large wp-image-3799590" src="data:image/gif;base64,R0lGODlhAQABAPAAAPLy8v///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://www.sqlservercentral.com/wp-content/uploads/2020/10/container2-1024x576.png" data-lazy-load alt="" width="1024" height="576" data-srcset="https://www.sqlservercentral.com/wp-content/uploads/2020/10/container2-1024x576.png 1024w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/container2-300x169.png 300w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/container2-768x432.png 768w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/container2-128x72.png 128w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/container2.png 1366w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<h3></h3>
+<h3>Step 5: Adding Items to the Container</h3>
+<p>I created a database, named database1, and then a container, named families. Now, I have the option to create a new item or upload an existing item. This item needs to be a JSON file for the SQL API.</p>
+<p>JSON stands for JavaScript Object Notation. JSON is a text format that is completely language independent but uses conventions that are familiar to programmers of the C-family of languages  including C, C++, C#, Java, JavaScript, Perl, Python, and many others. JSON is a collection of name-value pairs. Names can be any string value and are case sensitive. Values can be arrays. JSON objects always begin with a { left brace and end with a } right brace and the properties (name-value pairs) can be nested within one another.</p>
+<p><img class="alignnone size-large wp-image-3799591" src="data:image/gif;base64,R0lGODlhAQABAPAAAPLy8v///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://www.sqlservercentral.com/wp-content/uploads/2020/10/item1-1024x576.png" data-lazy-load alt="" width="1024" height="576" data-srcset="https://www.sqlservercentral.com/wp-content/uploads/2020/10/item1-1024x576.png 1024w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/item1-300x169.png 300w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/item1-768x432.png 768w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/item1-128x72.png 128w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/item1.png 1366w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>If I press the New Item link, a new empty JSON file is created. The elements can be added here.</p>
+<p><img class="alignnone size-large wp-image-3799592" src="data:image/gif;base64,R0lGODlhAQABAPAAAPLy8v///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://www.sqlservercentral.com/wp-content/uploads/2020/10/item_new-1024x576.png" data-lazy-load alt="" width="1024" height="576" data-srcset="https://www.sqlservercentral.com/wp-content/uploads/2020/10/item_new-1024x576.png 1024w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/item_new-300x169.png 300w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/item_new-768x432.png 768w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/item_new-128x72.png 128w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/item_new.png 1366w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>If I press the Upload Item link, a popup window is open for the folder explorer. I may select an existing JSON file from the device folder.</p>
+<p><img class="alignnone size-large wp-image-3799593" src="data:image/gif;base64,R0lGODlhAQABAPAAAPLy8v///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://www.sqlservercentral.com/wp-content/uploads/2020/10/item_upload-1024x576.png" data-lazy-load alt="" width="1024" height="576" data-srcset="https://www.sqlservercentral.com/wp-content/uploads/2020/10/item_upload-1024x576.png 1024w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/item_upload-300x169.png 300w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/item_upload-768x432.png 768w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/item_upload-128x72.png 128w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/item_upload.png 1366w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<h3></h3>
+<h3>Step 6: upload the two JSON files</h3>
+<p>Here, I upload two JSON files from the folder location. These two files are about two families. These files are taken from Microsoft documentation.</p>
+<p>Item 1:</p>
+<pre class="prettyprint  lang-json">{
+    "id": "AndersenFamily",
+    "lastName": "Andersen",
+    "parents": [
+        {
+            "firstName": "Thomas"
+        },
+        {
+            "firstName": "Mary Kay"
+        }
+    ],
+    "children": [
+        {
+            "firstName": "Henriette Thaulow",
+            "gender": "female",
+            "grade": 5,
+            "pets": [
+                {
+                    "givenName": "Fluffy"
+                }
+            ]
+        }
+    ],
+    "address": {
+        "state": "WA",
+        "county": "King",
+        "city": "Seattle"
+    },
+    "creationDate": 1431620472,
+    "isRegistered": true,
+    "_rid": "AzoFAMaUtpQBAAAAAAAAAA==",
+    "_self": "dbs/AzoFAA==/colls/AzoFAMaUtpQ=/docs/AzoFAMaUtpQBAAAAAAAAAA==/",
+    "_etag": "\"b50076de-0000-0200-0000-5f86d9ec0000\"",
+    "_attachments": "attachments/",
+    "_ts": 1602673132
+}</pre>
+<p>Item 2:</p>
+<pre class="prettyprint  lang-json">{
+    "id": "WakefieldFamily",
+    "parents": [
+        {
+            "familyName": "Wakefield",
+            "givenName": "Robin"
+        },
+        {
+            "familyName": "Miller",
+            "givenName": "Ben"
+        }
+    ],
+    "children": [
+        {
+            "familyName": "Merriam",
+            "givenName": "Jesse",
+            "gender": "female",
+            "grade": 1,
+            "pets": [
+                {
+                    "givenName": "Goofy"
+                },
+                {
+                    "givenName": "Shadow"
+                }
+            ]
+        },
+        {
+            "familyName": "Miller",
+            "givenName": "Lisa",
+            "gender": "female",
+            "grade": 8
+        }
+    ],
+    "address": {
+        "state": "NY",
+        "county": "Manhattan",
+        "city": "NY"
+    },
+    "creationDate": 1431620462,
+    "isRegistered": false,
+    "_rid": "AzoFAMaUtpQCAAAAAAAAAA==",
+    "_self": "dbs/AzoFAA==/colls/AzoFAMaUtpQ=/docs/AzoFAMaUtpQCAAAAAAAAAA==/",
+    "_etag": "\"b500b7df-0000-0200-0000-5f86da180000\"",
+    "_attachments": "attachments/",
+    "_ts": 1602673176
+}</pre>
+<h3>Step 7: Create the new query</h3>
+<p>I have two items now in the container named families. I press the New Query button. A new query window is open, in which I can write SQL-like queries on the items.</p>
+<p><img class="alignnone size-large wp-image-3799595" src="data:image/gif;base64,R0lGODlhAQABAPAAAPLy8v///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://www.sqlservercentral.com/wp-content/uploads/2020/10/query1-1024x576.png" data-lazy-load alt="" width="1024" height="576" data-srcset="https://www.sqlservercentral.com/wp-content/uploads/2020/10/query1-1024x576.png 1024w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/query1-300x169.png 300w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/query1-768x432.png 768w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/query1-128x72.png 128w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/query1.png 1366w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<h3></h3>
+<h3>Step 8: Save the query</h3>
+<p>After writing a query, I press the Save Query link. A window is open to save the query. To save the queries, a new database named ___Cosmos is created.</p>
+<p><img class="alignnone size-large wp-image-3799596" src="data:image/gif;base64,R0lGODlhAQABAPAAAPLy8v///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://www.sqlservercentral.com/wp-content/uploads/2020/10/query_save-1024x576.png" data-lazy-load alt="" width="1024" height="576" data-srcset="https://www.sqlservercentral.com/wp-content/uploads/2020/10/query_save-1024x576.png 1024w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/query_save-300x169.png 300w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/query_save-768x432.png 768w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/query_save-128x72.png 128w, https://www.sqlservercentral.com/wp-content/uploads/2020/10/query_save.png 1366w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<h3>Step 9: Write different queries on the items</h3>
+<p>Query 1 returns all the properties of both the items from the container named families. Query 2 returns all the properties of the item with id value matching with "AndersenFamily". Query 3 returns all the items matching the id values given in the list.  Query 4 returns items matching the lastname value given.</p>
+<p>In the select list, different property names can be mentioned instead of *. In the where clause, multiple search criteria can be mentioned based on the values of the property names.</p>
+<pre class="prettyprint  lang-vs">--Query 1
+SELECT * 
+FROM families as f
+
+--Query 2
+SELECT * 
+FROM families as f
+where f.id = "AndersenFamily"
+
+--Query 3
+SELECT * 
+FROM families as f
+where f.id IN ("AndersenFamily","WakefieldFamily")
+
+--Query 4
+SELECT * 
+FROM families as f
+where f.lastName = "Andersen"</pre>
+<p>A few others. Query 5 returns the nested property address in the select list for the items with the given lastname value. Query 6 returns the first record of the array property children from the items with the given id value. Query 7 returns the name for the second pet of the first children from the items with the given id value. I retrieve property value from multiple levels of nesting here.</p>
+<pre class="prettyprint  lang-vs">--Query 5
+--nested properties
+SELECT f.address.state, f.address.city 
+FROM families as f
+where f.lastName = "Andersen"
+
+--Query 6
+--retrieve data for first child
+SELECT f.children[0] AS c1
+FROM families as f
+where f.id = "WakefieldFamily"
+
+--Query 7
+--retrieve name for the second pet of the first child of WakefieldFamily and giving an alias 
+SELECT f.children[0].pets[1].givenName AS c1p2Name
+FROM families as f
+where f.id = "WakefieldFamily"</pre>
+<h3>Joins</h3>
+<p>In SQL API, different levels of the JSON document can be joined. Inner joins result in a complete cross product of the sets participating in the join. The result of an N-way join is a set of N-element tuples, where each value in the tuple is associated with the aliased set participating in the join and can be accessed by referencing that alias in other clauses.</p>
+<p>Query 8 returns parent details for each item in the families container. As both of the items have two parents each, total 8 JSON objects are returned. Each parent sublevel has its property names and values. Query 9 has join among multiple levels of the items. The first item has one children having one pet. The second item has two children each having one pet. So, this query returns three objects with property name and values from different levels of the items.</p>
+<pre class="prettyprint  lang-vs">--Query 8
+--self join
+SELECT f.id, f.parents
+FROM families as f
+JOIN p IN f.parents
+
+--Query 9
+--join with multiple levels within the JSON document
+SELECT 
+f.id AS familyName,
+c.givenName AS childGivenName,
+c.firstName AS childFirstName,
+p.givenName AS petName
+FROM families as f
+JOIN c IN f.children
+JOIN p IN c.pets</pre>
+<h3></h3>
+<h3>Conclusion</h3>
+<p>In this article, I gave introduction about the basics of Azure Cosmos DB. I used SQL API and processed two JSON documents. I have added these documents and then queried them using SQL-like code. There are many aspects of Azure Cosmos DB including global distribution, partitioning, data analytics etc. I will discuss about them in details in the next series of articles.</p>
+                </div>
+
+                                                    
+                                    
+<ul class="ssc-books-links">
+    
+    
+    
+    
+    
+    
+    
+    
+    </ul>
+
+                
+                                                    
+                                                    
+                                                    
+            </div>
+        </div>
+
+        <div class="grid__col grid__col--span-2-of-12 content-single-sidebar">
+            <div class="sidebar">
+    <aside class="sidebar__widget sidebar__widget--advads_ad_widget-4 sqlse-widget clearfix"><a href="https://www.pass.org/summit/2020/Register-Now?utm_source=Redgate&#038;utm_medium=web&#038;utm_campaign=SQLServerCentral"><img   src='https://www.sqlservercentral.com/wp-content/uploads/2020/10/PASS_20_DisplayBanners_336x280-003.jpg' alt=''  width="100%"  style="max-width:100%;"/></a></aside></div>            <!-- template-parts/content-single-sidebar-meta.php -->
+
+    <div class="spaced-bottom">
+        
+        <div data-target="ssc-visitor-counter">
+            <!-- Target for ssc-visitor-counter.js, which dynamically injects
+            right here visitor stats for the current post or page. -->
+        </div>
+    </div>
+
+    <div class="spaced-bottom">
+        <h2 class="gamma">Rate</h2>
+        
+<div class="ssc-star-rating ssc-star-rating--interactive" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" data-target="ssc-star-rating" data-post="3797071">
+
+            <meta itemprop="ratingValue" content="2" />
+        <meta itemprop="ratingCount" content="1" />
+    
+    <div class="ssc-star-rating__inner">
+
+        
+        <div class="ssc-star-rating__average">
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                    </div>
+
+        
+                    <div class="ssc-star-rating__vote" hidden style="display: none;">
+                                                        <span class="ssc-star-rating__star ssc-star-rating__star--vote">★</span>
+                                                        <span class="ssc-star-rating__star ssc-star-rating__star--vote">★</span>
+                                                        <span class="ssc-star-rating__star ssc-star-rating__star--vote">★</span>
+                                                        <span class="ssc-star-rating__star ssc-star-rating__star--vote">★</span>
+                                                        <span class="ssc-star-rating__star ssc-star-rating__star--vote">★</span>
+                            </div>
+            </div>
+
+            <p class="ssc-star-rating__stats">
+            <span data-target="ssc-star-rating-score">2</span>
+            (<span data-target="ssc-star-rating-count">1</span>)
+        </p>
+    
+        <p class="ssc-star-rating__login-notice">
+        <a href="/wp-login.php?redirect_to=https://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db">Log in</a> or <a href="/wp-login.php?action=register">register</a> to rate
+    </p>
+</div>
+    </div>
+
+    <div class="spaced-bottom">
+        
+<!-- template-parts/ssc-social-icons.php -->
+<h2 class="gamma">Share</h2>
+<ul class="sharing list--horizontal">
+            <li><a class="sharing__link sharing__link--email" title="Email" target="" href="mailto:?subject=Article on https://www.sqlservercentral.com: An Introduction to Azure Cosmos DB&body=I found this great article on https://www.sqlservercentral.com.%0D%0A%0D%0A
+It's called An Introduction to Azure Cosmos DB.%0D%0A%0D%0A
+You can find it here http://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db."></a></li>
+            <li><a class="sharing__link sharing__link--facebook" title="Share on Facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db&quote=An Introduction to Azure Cosmos DB"></a></li>
+            <li><a class="sharing__link sharing__link--twitter" title="Tweet" target="_blank" href="https://twitter.com/intent/tweet?source=http://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db&text=An Introduction to Azure Cosmos DB:%20http://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db"></a></li>
+            <li><a class="sharing__link sharing__link--linked-in" title="Share on LinkedIn" target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db&title=An Introduction to Azure Cosmos DB&summary=Introduction Azure Cosmos DB is Microsoft's globally distributed, multi-model platform-as-a-service (PaaS) database. Any web, mobile, gaming, and&source=http://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db"></a></li>
+            <li><a class="sharing__link sharing__link--print" title="Print" target="" href="javascript:window.print && window.print();"></a></li>
+    </ul>
+<!-- / template-parts/ssc-social-icons.php -->
+    </div>
+
+
+
+        <div class="post__tags spaced-bottom">
+            <h2 class="gamma">Categories</h2>
+            <ul class="list--bare">
+                                                        <li><a href="https://www.sqlservercentral.com/categories/azure-cosmos-db" class="label background-color--blue--1 color--blue--8">Azure Cosmos DB</a></li>
+                            </ul>
+        </div>
+    
+
+<meta itemprop="keywords" content="Azure Cosmos DB">
+
+<!-- / template-parts/content-single-sidebar-meta.php -->
+        </div>
+    </div>
+</div>
+
+<!-- template-parts/content-single-meta.php -->
+<div class="band content-single-meta">
+    <div class="band__inner-container padded--tight--small padded-top--none grid">
+        <div class="grid__row spaced-bottom">
+            <div class="grid__col grid__col--span-10-of-12 grid__col--push-2-of-12">
+                <div class="padded-left padded-h--none--small clearfix">
+
+                                            <p><a href="https://www.sqlservercentral.com/forums/topic/an-introduction-to-azure-cosmos-db"><strong>Join the discussion and add your comment</strong></a></p>                    
+                                            
+        <div data-target="ssc-related-forum-topics-top-comments">
+            <!-- Target for ssc-related-forum-topics/top-comments.js. -->
+        </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="grid__row hide-on-small">
+            <div class="grid__col grid__col--span-10-of-12 grid__col--push-2-of-12">
+                <div class="padded-left padded-h--none--small clearfix">
+
+                                            <div class="grid__col grid__col--span-3-of-12">
+                            
+<!-- template-parts/ssc-social-icons.php -->
+<h2 class="gamma">Share</h2>
+<ul class="sharing list--horizontal">
+            <li><a class="sharing__link sharing__link--email" title="Email" target="" href="mailto:?subject=Article on https://www.sqlservercentral.com: An Introduction to Azure Cosmos DB&body=I found this great article on https://www.sqlservercentral.com.%0D%0A%0D%0A
+It's called An Introduction to Azure Cosmos DB.%0D%0A%0D%0A
+You can find it here http://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db."></a></li>
+            <li><a class="sharing__link sharing__link--facebook" title="Share on Facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db&quote=An Introduction to Azure Cosmos DB"></a></li>
+            <li><a class="sharing__link sharing__link--twitter" title="Tweet" target="_blank" href="https://twitter.com/intent/tweet?source=http://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db&text=An Introduction to Azure Cosmos DB:%20http://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db"></a></li>
+            <li><a class="sharing__link sharing__link--linked-in" title="Share on LinkedIn" target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db&title=An Introduction to Azure Cosmos DB&summary=Introduction Azure Cosmos DB is Microsoft's globally distributed, multi-model platform-as-a-service (PaaS) database. Any web, mobile, gaming, and&source=http://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db"></a></li>
+            <li><a class="sharing__link sharing__link--print" title="Print" target="" href="javascript:window.print && window.print();"></a></li>
+    </ul>
+<!-- / template-parts/ssc-social-icons.php -->
+                        </div>
+                    
+                                            <div class="grid__col grid__col--span-3-of-12">
+                            <h2 class="gamma">Rate</h2>
+                            
+<div class="ssc-star-rating ssc-star-rating--interactive" data-target="ssc-star-rating" data-post="3797071">
+
+    
+    <div class="ssc-star-rating__inner">
+
+        
+        <div class="ssc-star-rating__average">
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                    </div>
+
+        
+                    <div class="ssc-star-rating__vote" hidden style="display: none;">
+                                                        <span class="ssc-star-rating__star ssc-star-rating__star--vote">★</span>
+                                                        <span class="ssc-star-rating__star ssc-star-rating__star--vote">★</span>
+                                                        <span class="ssc-star-rating__star ssc-star-rating__star--vote">★</span>
+                                                        <span class="ssc-star-rating__star ssc-star-rating__star--vote">★</span>
+                                                        <span class="ssc-star-rating__star ssc-star-rating__star--vote">★</span>
+                            </div>
+            </div>
+
+            <p class="ssc-star-rating__stats">
+            <span data-target="ssc-star-rating-score">2</span>
+            (<span data-target="ssc-star-rating-count">1</span>)
+        </p>
+    
+        <p class="ssc-star-rating__login-notice">
+        <a href="/wp-login.php?redirect_to=https://www.sqlservercentral.com/articles/an-introduction-to-azure-cosmos-db">Log in</a> or <a href="/wp-login.php?action=register">register</a> to rate
+    </p>
+</div>
+                        </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- / template-parts/content-single-meta.php -->
+
+
+<!-- template-parts/ssc-related-content-list.php -->
+<div class="band border-top border-color--grey--3 related-content">
+    <div class="band__inner-container grid">
+        <div class="grid__row">
+            <div class="grid__col grid__col--span-10-of-12 grid__col--push-2-of-12">
+                <h1 class="text--normal padded-h padded-h--none--small spaced-bottom">Related content</h1>
+            </div>
+        </div>
+
+        
+<!-- template-parts/ssc-related-content-list-item.php -->
+
+<!-- template-parts/content-loop.php -->
+<article class="grid__row spaced-bottom post-listing__post">
+
+        <div class="grid__col grid__col--span-2-of-12">
+        
+    <div class="thumbnail-container">
+        <a href="https://www.sqlservercentral.com/articles/access-external-data-from-azure-synapse-analytics-using-polybase" class="link-image flex flex-align--center flex-justify--center"><img src="https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-post-thumbnails/images/technical-article.svg" alt="" /></a>
+    </div>
+    </div>
+
+    
+    <div class="grid__col grid__col--span-8-of-12">
+        <div class="padded-h padded-h--none--small">
+            <h1 class="beta">
+                                    <a href="https://www.sqlservercentral.com/articles/access-external-data-from-azure-synapse-analytics-using-polybase">Access external data from Azure Synapse Analytics using Polybase</a>
+                            </h1>
+
+                            <div class="post-listing__taxonomies">
+                    <ul class="post-listing__author list--horizontal list--bare display--inline">
+                        <li>by <a href="https://www.sqlservercentral.com/author/sucharita1das" itemprop="url"><span itemprop="author" itemtype="http://schema.org/Person"><span itemprop="name">Sucharita Das</span></span></a></li>
+                    </ul>
+
+                                            <ul class="post-listing__sources list--horizontal list--bare display--inline">
+                            <li><a href="https://www.sqlservercentral.com">SQLServerCentral</a></li>
+                        </ul>
+                    
+                                            <ul class="post-listing__categories list--horizontal list--bare display--inline">
+                                                            <li><a href="https://www.sqlservercentral.com/categories/azure-sql-data-warehouse-asdw">Azure Synapse (formerly Azure SQL Data Warehouse)</a></li>
+                                                            <li><a href="https://www.sqlservercentral.com/categories/etl-extract-transform-and-load">ETL (Extract Transform and Load)</a></li>
+                                                            <li><a href="https://www.sqlservercentral.com/categories/polybase">PolyBase</a></li>
+                                                    </ul>
+                    
+                                    </div>
+            
+            <p>Learn how you can use Polybase technology in Azure Synapse to load data into your warehouse.</p>
+
+                            
+<ul class="ssc-books-links">
+    
+    
+    
+    
+    
+    
+    
+    
+    </ul>
+
+            
+        </div>
+    </div>
+
+                        <div class="grid__col grid__col--span-2-of-12">
+                
+<div class="ssc-star-rating">
+
+    
+    <div class="ssc-star-rating__inner">
+
+        
+        <div class="ssc-star-rating__average">
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                    </div>
+
+        
+            </div>
+
+    
+        <p class="ssc-star-rating__login-notice">
+        <a href="/wp-login.php?redirect_to=https://www.sqlservercentral.com/articles/access-external-data-from-azure-synapse-analytics-using-polybase">Log in</a> or <a href="/wp-login.php?action=register">register</a> to rate
+    </p>
+</div>
+
+                <p class="spaced-bottom--none"><span itemprop="dateCreated">2020-07-28</span></p>
+                                    <p class="spaced-bottom--none">2,935 reads</p>
+                                <ul class="list--bare list--horizontal spaced-bottom--none">
+                    <li class="spaced-right--tight"><a href="https://www.sqlservercentral.com/forums/topic/access-external-data-from-azure-synapse-analytics-using-polybase">Discuss</a></li>
+                </ul>
+            </div>
+            
+</article>
+
+<!-- / template-parts/ssc-related-content-list-item.php -->
+
+<!-- template-parts/ssc-related-content-list-item.php -->
+
+<!-- template-parts/content-loop.php -->
+<article class="grid__row spaced-bottom post-listing__post">
+
+        <div class="grid__col grid__col--span-2-of-12">
+        
+    <div class="thumbnail-container">
+        <a href="https://www.sqlservercentral.com/articles/loading-data-in-azure-synapse-analytics-using-azure-data-factory" class="link-image flex flex-align--center flex-justify--center"><img src="https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-post-thumbnails/images/technical-article.svg" alt="" /></a>
+    </div>
+    </div>
+
+    
+    <div class="grid__col grid__col--span-8-of-12">
+        <div class="padded-h padded-h--none--small">
+            <h1 class="beta">
+                                    <a href="https://www.sqlservercentral.com/articles/loading-data-in-azure-synapse-analytics-using-azure-data-factory">Loading data in Azure Synapse Analytics using Azure Data Factory</a>
+                            </h1>
+
+                            <div class="post-listing__taxonomies">
+                    <ul class="post-listing__author list--horizontal list--bare display--inline">
+                        <li>by <a href="https://www.sqlservercentral.com/author/sucharita1das" itemprop="url"><span itemprop="author" itemtype="http://schema.org/Person"><span itemprop="name">Sucharita Das</span></span></a></li>
+                    </ul>
+
+                                            <ul class="post-listing__sources list--horizontal list--bare display--inline">
+                            <li><a href="https://www.sqlservercentral.com">SQLServerCentral</a></li>
+                        </ul>
+                    
+                    
+                                    </div>
+            
+            <p>This article shows a basic Azure Data Factory pipeline to load data into Azure Synapse.</p>
+
+                            
+<ul class="ssc-books-links">
+    
+    
+    
+    
+    
+    
+    
+    
+    </ul>
+
+            
+        </div>
+    </div>
+
+                        <div class="grid__col grid__col--span-2-of-12">
+                
+<div class="ssc-star-rating">
+
+    
+    <div class="ssc-star-rating__inner">
+
+        
+        <div class="ssc-star-rating__average">
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                    </div>
+
+        
+            </div>
+
+            <p class="ssc-star-rating__stats">
+            <span data-target="ssc-star-rating-score">5</span>
+            (<span data-target="ssc-star-rating-count">1</span>)
+        </p>
+    
+        <p class="ssc-star-rating__login-notice">
+        <a href="/wp-login.php?redirect_to=https://www.sqlservercentral.com/articles/loading-data-in-azure-synapse-analytics-using-azure-data-factory">Log in</a> or <a href="/wp-login.php?action=register">register</a> to rate
+    </p>
+</div>
+
+                <p class="spaced-bottom--none"><span itemprop="dateCreated">2020-07-20</span></p>
+                                    <p class="spaced-bottom--none">3,250 reads</p>
+                                <ul class="list--bare list--horizontal spaced-bottom--none">
+                    <li class="spaced-right--tight"><a href="https://www.sqlservercentral.com/forums/topic/loading-data-in-azure-synapse-analytics-using-azure-data-factory">Discuss</a></li>
+                </ul>
+            </div>
+            
+</article>
+
+<!-- / template-parts/ssc-related-content-list-item.php -->
+
+<!-- template-parts/ssc-related-content-list-item.php -->
+
+<!-- template-parts/content-loop.php -->
+<article class="grid__row spaced-bottom post-listing__post">
+
+        <div class="grid__col grid__col--span-2-of-12">
+        
+    <div class="thumbnail-container">
+        <a href="https://www.sqlservercentral.com/articles/loading-data-in-azure-synapse-using-copy" class="link-image flex flex-align--center flex-justify--center"><img src="https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-post-thumbnails/images/technical-article.svg" alt="" /></a>
+    </div>
+    </div>
+
+    
+    <div class="grid__col grid__col--span-8-of-12">
+        <div class="padded-h padded-h--none--small">
+            <h1 class="beta">
+                                    <a href="https://www.sqlservercentral.com/articles/loading-data-in-azure-synapse-using-copy">Loading data in Azure Synapse using Copy</a>
+                            </h1>
+
+                            <div class="post-listing__taxonomies">
+                    <ul class="post-listing__author list--horizontal list--bare display--inline">
+                        <li>by <a href="https://www.sqlservercentral.com/author/sucharita1das" itemprop="url"><span itemprop="author" itemtype="http://schema.org/Person"><span itemprop="name">Sucharita Das</span></span></a></li>
+                    </ul>
+
+                                            <ul class="post-listing__sources list--horizontal list--bare display--inline">
+                            <li><a href="https://www.sqlservercentral.com">SQLServerCentral</a></li>
+                        </ul>
+                    
+                                            <ul class="post-listing__categories list--horizontal list--bare display--inline">
+                                                            <li><a href=""></a></li>
+                                                    </ul>
+                    
+                                    </div>
+            
+            <p>Learn how to create a Synapse resource and upload data using the COPY command.</p>
+
+                            
+<ul class="ssc-books-links">
+    
+    
+    
+    
+    
+    
+    
+    
+    </ul>
+
+            
+        </div>
+    </div>
+
+                        <div class="grid__col grid__col--span-2-of-12">
+                
+<div class="ssc-star-rating">
+
+    
+    <div class="ssc-star-rating__inner">
+
+        
+        <div class="ssc-star-rating__average">
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                    </div>
+
+        
+            </div>
+
+            <p class="ssc-star-rating__stats">
+            <span data-target="ssc-star-rating-score">5</span>
+            (<span data-target="ssc-star-rating-count">3</span>)
+        </p>
+    
+        <p class="ssc-star-rating__login-notice">
+        <a href="/wp-login.php?redirect_to=https://www.sqlservercentral.com/articles/loading-data-in-azure-synapse-using-copy">Log in</a> or <a href="/wp-login.php?action=register">register</a> to rate
+    </p>
+</div>
+
+                <p class="spaced-bottom--none"><span itemprop="dateCreated">2020-07-13</span></p>
+                                    <p class="spaced-bottom--none">5,505 reads</p>
+                                <ul class="list--bare list--horizontal spaced-bottom--none">
+                    <li class="spaced-right--tight"><a href="https://www.sqlservercentral.com/forums/topic/loading-data-in-azure-synapse-using-copy">Discuss</a></li>
+                </ul>
+            </div>
+            
+</article>
+
+<!-- / template-parts/ssc-related-content-list-item.php -->
+
+<!-- template-parts/ssc-related-content-list-item.php -->
+
+<!-- template-parts/content-loop.php -->
+<article class="grid__row spaced-bottom post-listing__post">
+
+        <div class="grid__col grid__col--span-2-of-12">
+        
+    <div class="thumbnail-container">
+        <a href="https://www.sqlservercentral.com/editorials/moving-away-from-an-rdbms" class="link-image flex flex-align--center flex-justify--center"><img src="https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-post-thumbnails/images/editorial-cowboy.svg" alt="" /></a>
+    </div>
+    </div>
+
+    
+    <div class="grid__col grid__col--span-8-of-12">
+        <div class="padded-h padded-h--none--small">
+            <h1 class="beta">
+                                    <a href="https://www.sqlservercentral.com/editorials/moving-away-from-an-rdbms">Moving away from an RDBMS</a>
+                            </h1>
+
+                            <div class="post-listing__taxonomies">
+                    <ul class="post-listing__author list--horizontal list--bare display--inline">
+                        <li>by <a href="https://www.sqlservercentral.com/author/steve-jones-ssc-editor" itemprop="url"><span itemprop="author" itemtype="http://schema.org/Person"><span itemprop="name">Steve Jones</span></span></a></li>
+                    </ul>
+
+                                            <ul class="post-listing__sources list--horizontal list--bare display--inline">
+                            <li><a href="https://www.sqlservercentral.com">SQLServerCentral</a></li>
+                        </ul>
+                    
+                                            <ul class="post-listing__categories list--horizontal list--bare display--inline">
+                                                            <li><a href="https://www.sqlservercentral.com/categories/azure-cosmos-db">Azure Cosmos DB</a></li>
+                                                            <li><a href="https://www.sqlservercentral.com/categories/data-modeling">Data Modeling</a></li>
+                                                    </ul>
+                    
+                                    </div>
+            
+            <p>Today Steve looks at an article the migrates a relational model to CosmosDB.</p>
+
+                            
+<ul class="ssc-books-links">
+    
+    
+    
+    
+    
+    
+    
+    
+    </ul>
+
+            
+        </div>
+    </div>
+
+                        <div class="grid__col grid__col--span-2-of-12">
+                
+<div class="ssc-star-rating">
+
+    
+    <div class="ssc-star-rating__inner">
+
+        
+        <div class="ssc-star-rating__average">
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full ">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half ">★</span>
+                    </div>
+
+        
+            </div>
+
+    
+        <p class="ssc-star-rating__login-notice">
+        <a href="/wp-login.php?redirect_to=https://www.sqlservercentral.com/editorials/moving-away-from-an-rdbms">Log in</a> or <a href="/wp-login.php?action=register">register</a> to rate
+    </p>
+</div>
+
+                <p class="spaced-bottom--none"><span itemprop="dateCreated">2020-07-10</span></p>
+                                    <p class="spaced-bottom--none">285 reads</p>
+                                <ul class="list--bare list--horizontal spaced-bottom--none">
+                    <li class="spaced-right--tight"><a href="https://www.sqlservercentral.com/forums/topic/moving-away-from-an-rdbms">Discuss</a></li>
+                </ul>
+            </div>
+            
+</article>
+
+<!-- / template-parts/ssc-related-content-list-item.php -->
+
+<!-- template-parts/ssc-related-content-list-item.php -->
+
+<!-- template-parts/content-loop.php -->
+<article class="grid__row spaced-bottom post-listing__post">
+
+        <div class="grid__col grid__col--span-2-of-12">
+        
+    <div class="thumbnail-container">
+        <a href="https://www.sqlservercentral.com/articles/creating-a-azure-cosmos-db-account" class="link-image flex flex-align--center flex-justify--center"><img src="https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-post-thumbnails/images/technical-article.svg" alt="" /></a>
+    </div>
+    </div>
+
+    
+    <div class="grid__col grid__col--span-8-of-12">
+        <div class="padded-h padded-h--none--small">
+            <h1 class="beta">
+                                    <a href="https://www.sqlservercentral.com/articles/creating-a-azure-cosmos-db-account">Creating a Azure Cosmos DB Account</a>
+                            </h1>
+
+                            <div class="post-listing__taxonomies">
+                    <ul class="post-listing__author list--horizontal list--bare display--inline">
+                        <li>by <a href="https://www.sqlservercentral.com/author/deepak-sahu" itemprop="url"><span itemprop="author" itemtype="http://schema.org/Person"><span itemprop="name">Deepak Prasad Sahu</span></span></a></li>
+                    </ul>
+
+                                            <ul class="post-listing__sources list--horizontal list--bare display--inline">
+                            <li><a href="https://www.sqlservercentral.com">SQLServerCentral</a></li>
+                        </ul>
+                    
+                                            <ul class="post-listing__categories list--horizontal list--bare display--inline">
+                                                            <li><a href="https://www.sqlservercentral.com/categories/azure-cosmos-db">Azure Cosmos DB</a></li>
+                                                    </ul>
+                    
+                                    </div>
+            
+            <p>Learn how to get started with a CosmosDB account.</p>
+
+                            
+<ul class="ssc-books-links">
+    
+    
+    
+    
+    
+    
+    
+    
+    </ul>
+
+            
+        </div>
+    </div>
+
+                        <div class="grid__col grid__col--span-2-of-12">
+                
+<div class="ssc-star-rating">
+
+    
+    <div class="ssc-star-rating__inner">
+
+        
+        <div class="ssc-star-rating__average">
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                                            <span class="ssc-star-rating__star ssc-star-rating__star--full  ssc-star-rating__star--active">★</span>
+                <span class="ssc-star-rating__star ssc-star-rating__star--half  ssc-star-rating__star--active">★</span>
+                    </div>
+
+        
+            </div>
+
+            <p class="ssc-star-rating__stats">
+            <span data-target="ssc-star-rating-score">5</span>
+            (<span data-target="ssc-star-rating-count">1</span>)
+        </p>
+    
+        <p class="ssc-star-rating__login-notice">
+        <a href="/wp-login.php?redirect_to=https://www.sqlservercentral.com/articles/creating-a-azure-cosmos-db-account">Log in</a> or <a href="/wp-login.php?action=register">register</a> to rate
+    </p>
+</div>
+
+                <p class="spaced-bottom--none"><span itemprop="dateCreated">2020-05-18</span></p>
+                                    <p class="spaced-bottom--none">1,183 reads</p>
+                                <ul class="list--bare list--horizontal spaced-bottom--none">
+                    <li class="spaced-right--tight"><a href="https://www.sqlservercentral.com/forums/topic/creating-a-azure-cosmos-db-account">Discuss</a></li>
+                </ul>
+            </div>
+            
+</article>
+
+<!-- / template-parts/ssc-related-content-list-item.php -->
+    </div>
+</div>
+<!-- / template-parts/ssc-related-content-list.php -->
+
+<!-- FOOTER -->
+<footer>
+    <div class="band background-color--blue--9 color--white footer__graphs">
+        <div class="band__inner-container band__inner-container--tight grid">
+            <a href="https://monitor.red-gate.com/overviews/SQLMON-EC2-BM2/cluster/sscdbcluster.ssc.local/sql/ssc-db-n1%5C(local)" target="_blank" rel="noopener" class="flex" title="Take a peek into our servers">
+                <div class="grid__col grid__col--span-2-of-12 grid__col--span-12-of-12--medium flex flex-align--center">
+                    <img src="https://www.sqlservercentral.com/wp-content/themes/ssc-twentyeighteen/images/header/ssc-logo.svg" alt="" class="logo">
+                    <img src="https://www.sqlservercentral.com/wp-content/themes/ssc-twentyeighteen/images/header/ssc.svg" alt="" class="logo">
+                </div>
+                <div class="grid__col grid__col--span-2-of-12 grid__col--span-3-of-12--medium">
+                    <div class="padded-h--tight">
+                        <p class="zeta color--white spaced-bottom--none">CPU</p>
+                        <script>var cpuChartData = {"labels":[1605451199788,1605451694955,1605452205285,1605452700908,1605453195938,1605453691689,1605454202298,1605454697735,1605455193280,1605455688701,1605456198731,1605456694123,1605457189183,1605457684331,1605458194729,1605458690508,1605459185679,1605459696037,1605460191320,1605460687348,1605461182475,1605461692535,1605462188410,1605462683436,1605463180596,1605463690689,1605464185718,1605464680779,1605465176027,1605465687156,1605466183216,1605466679743,1605467174791,1605467684864,1605468180128,1605468675860,1605469170891,1605469680920,1605470175949,1605470671712,1605471182211,1605471677288,1605472172472,1605472667523,1605473177875,1605473674194,1605474169465,1605474664510,1605475163418,1605475674599,1605476169660,1605476664676,1605477174884,1605477669985,1605478165732,1605478660978,1605479171025,1605479666085,1605480161687,1605480657785,1605481168096,1605481663690,1605482159764,1605482655359,1605483165807,1605483661841,1605484158180,1605484654069,1605485164847,1605485659875,1605486155171,1605486650262,1605487161606,1605487657667,1605488152748,1605488647851,1605489158237,1605489654361,1605490149422,1605490644597,1605491142153,1605491654107,1605492149197,1605492645727,1605493142051,1605493652034,1605494147344,1605494642406,1605495138013,1605495648526,1605496143925,1605496638881,1605497136036,1605497646104,1605498141765,1605498636670,1605499146778,1605499642641,1605500137733,1605500633229,1605501144048,1605501639395,1605502135691,1605502630800,1605503140985,1605503637460,1605504132324,1605504629347,1605505140384,1605505635703,1605506130519,1605506626191,1605507136504,1605507632315,1605508112895,1605508628342,1605509123418,1605509633554,1605510130751,1605510626952,1605511122375,1605511620230,1605512125469,1605512620636,1605513130716,1605513626160,1605514122959,1605514618618,1605515118407,1605515613492,1605516123876,1605516618922,1605517114202,1605517624325,1605518119246,1605518615398,1605519015050,1605519608331,1605520118614,1605520613979,1605521110236,1605521606094,1605522116336,1605522618501,1605523114457,1605523609704,1605524106349,1605524601982,1605525112559,1605525609793,1605526104939,1605526600844,1605527110991,1605527606319,1605528104074,1605528599186,1605529109370,1605529605676,1605530102390,1605530598472,1605531095962,1605531607236,1605532102247,1605532597498,1605533092903,1605533603968,1605534099083,1605534594198,1605535089249,1605535599713,1605536095137,1605536591106,1605537086903,1605537597441],"dataSets":[{"label":"","data":[2.7169635954531577,4.272543333204325,2.8734503868289503,3.974630510822784,3.240413891755141,5.4845024224242405,4.068366748687904,5.6436907768177065,4.743035492864931,3.442857084211507,4.562774090801524,5.660361795078005,5.429031909185173,3.905868914524203,4.872889519314446,4.7301653259851815,2.9681194707321095,4.184407882583819,3.3937347301301526,2.228247428708005,1.7664352435151311,4.607683044646779,2.7063136761804487,3.1465327226225552,2.5480680544680423,3.6034352044241618,2.546803012624078,2.33872577234883,3.146701763486225,5.8040244967174175,4.208947288382568,5.112069639871825,3.9342744070952,3.2907392875820256,2.4403027681977463,3.3437743858333384,2.4580205521010847,4.347947892553155,2.7097553771935377,3.1855849909923246,3.6196993161401894,4.43783645285617,2.8761377785223177,3.3767842365733185,3.7535331987180593,4.728174252803452,3.5760107102502436,2.8718167979269213,4.299622689555324,3.4654716560158234,7.083252287818387,4.550438350143007,2.297241765905615,4.8640661074369484,3.922426727250899,3.212177712377049,4.531217366412207,3.9795496539357877,5.325750760806693,7.143249676394162,3.3657464139355655,6.439172593288439,5.185641222285036,4.2645171732535205,5.005949257250846,4.09576382875134,2.7199153337662976,2.29779947569157,7.824685519989603,5.487773522591793,5.25412482882583,6.345498509353849,7.193442201186964,6.211030684926022,4.665826676004085,3.5492155985537686,3.915541727820371,4.576886590586248,3.8114790104200678,4.256697444567529,4.362339992492284,7.537372203255963,6.8090575189457105,5.698143291644694,7.567739441817569,8.141349135336519,3.550098004061913,4.698752840922741,8.597412202347869,5.573815974720687,4.44401902303465,6.176763474835721,6.0861956775866535,8.2276819789336,8.676084525290968,10.33421144957003,10.281588843602268,4.7856906083214055,3.790724611135491,5.707666658947126,6.387957462398772,8.951269988940712,6.977464202087321,10.765466090428946,8.475399849174375,7.083135569450041,6.147915695600837,6.602211936720074,7.034939362672075,8.438370772546032,7.475155665371336,17.73123028712434,25.102143141234514,19.800686653937593,22.642293738162447,24.06663477120094,11.617927047695474,8.902352333631121,8.655545132497062,10.487901494242521,9.63309149728661,8.265932896847449,11.753426286191962,12.965948330475193,15.735129903317805,14.500074979114316,9.404746806665111,16.834041397177263,12.313016207507966,7.863621651876159,10.083553516535176,12.875628875348289,9.83306088979946,8.145233015021418,12.630254975760588,15.19467887490685,17.545071798225013,9.9618132110992,14.334866694628673,15.223142748003527,13.95566531480322,11.22421096042909,11.229359633488912,7.895120693132801,11.409850735291224,15.014211859187437,10.69951644646313,11.483127315752428,13.659480501176253,13.054632087440101,18.31017142864086,10.039250612263963,15.734607950735324,10.013077768199349,9.75082757740596,8.586275135230444,6.977418116914805,5.182820059454955,7.874415220083275,9.541170512396553,7.538231580253926,6.669908645295452,7.045297277063886,6.472020445166643,8.795672853932526,7.11213960485485,12.616637381600338,10.727848844539633,8.505287859681623,8.17348147634573,12.769995261513637,10.572736836531952,10.985305966584738,12.388896894162055],"colour":"42, 94, 157"}],"chart":"cpu"};</script><div
+        id="chart--cpu"
+        height="66"
+        class="js-chart"
+        data-chart-type="line"
+        data-chart-source="cpuChartData"
+        data-chart-colour-opacity="1"
+        data-chart-vertical-gridlines="false"
+        data-chart-horizontal-gridlines="false"
+        data-chart-legend="false"
+        data-chart-horizontal-axis="false"
+        data-chart-vertical-axis="false"
+        data-chart-animation="false"
+        data-chart-point-radius="0"
+        data-chart-tooltips="false"
+    ></div>                    </div>
+                </div>
+
+                <div class="grid__col grid__col--span-2-of-12 grid__col--span-3-of-12--medium">
+                    <div class="padded-h--tight">
+                        <p class="zeta color--white spaced-bottom--none">Memory</p>
+                        <script>var memoryChartData = {"labels":[1605450703762,1605451199778,1605451694900,1605452205275,1605452700899,1605453195929,1605453691679,1605454202276,1605454697724,1605455193271,1605455688692,1605456198722,1605456694113,1605457189173,1605457684307,1605458194719,1605458690498,1605459185670,1605459696027,1605460191309,1605460687339,1605461182464,1605461692525,1605462188399,1605462683427,1605463180585,1605463690679,1605464185708,1605464680770,1605465176018,1605465687143,1605466183206,1605466679733,1605467174782,1605467684855,1605468180119,1605468675850,1605469170880,1605469680909,1605470175939,1605470671703,1605471182201,1605471677278,1605472172462,1605472667508,1605473177865,1605473674181,1605474169455,1605474664500,1605475163407,1605475674590,1605476169651,1605476664667,1605477174871,1605477669974,1605478165722,1605478660969,1605479171015,1605479666076,1605480161674,1605480657775,1605481168086,1605481663678,1605482159753,1605482655349,1605483165797,1605483661831,1605484158170,1605484654059,1605485164838,1605485659866,1605486155162,1605486650253,1605487161595,1605487657657,1605488152738,1605488647841,1605489158228,1605489654351,1605490149411,1605490644587,1605491142144,1605491654098,1605492149187,1605492645717,1605493142004,1605493652025,1605494147335,1605494642397,1605495138003,1605495648517,1605496143851,1605496638872,1605497136027,1605497646095,1605498141739,1605498636661,1605499146769,1605499642633,1605500137725,1605500633218,1605501144026,1605501639385,1605502135681,1605502630790,1605503140976,1605503637435,1605504132315,1605504629337,1605505140374,1605505635677,1605506130511,1605506626182,1605507136494,1605507632305,1605508112514,1605508628331,1605509123405,1605509633544,1605510130743,1605510626942,1605511122366,1605511620036,1605512125459,1605512620624,1605513130696,1605513626148,1605514122928,1605514618609,1605515118387,1605515613480,1605516123867,1605516618912,1605517114191,1605517624291,1605518119235,1605518615389,1605519014451,1605519608321,1605520118605,1605520613804,1605521110226,1605521606084,1605522116327,1605522618491,1605523114437,1605523609693,1605524106340,1605524601965,1605525112540,1605525609783,1605526104927,1605526600835,1605527110980,1605527606300,1605528104064,1605528599176,1605529109361,1605529605655,1605530102380,1605530598410,1605531095953,1605531607227,1605532102238,1605532597489,1605533092894,1605533603956,1605534099074,1605534594189,1605535089238,1605535599703,1605536095127,1605536591095,1605537086894,1605537597424],"dataSets":[{"label":"","data":[53664366592,53664710656,53664751616,53670715392,53672534016,53672812544,53672239104,53671968768,53666832384,53667241984,53673345024,53673345024,53673607168,53672329216,53670912000,53673951232,53672222720,53674057728,53673697280,53671591936,53670993920,53673271296,53673541632,53673467904,53672534016,53673156608,53671100416,53667995648,53671780352,53670232064,53673082880,53672861696,53672591360,53670281216,53670068224,53668921344,53673631744,53672443904,53671755776,53672280064,53670789120,53669453824,53668847616,53669699584,53669838848,53669593088,53673222144,53672558592,53669675008,53669380096,53674491904,53667823616,53674876928,53671919616,53670420480,53671944192,53673664512,53671870464,53674803200,53674762240,53673656320,53674663936,53671682048,53674745856,53673558016,53673828352,53674926080,53671452672,53673934848,53672730624,53671698432,53671165952,53666275328,53665021952,53659107328,53657960448,53666480128,53670748160,53670920192,53670322176,53670977536,53669879808,53671190528,53666824192,53671419904,53669994496,53670330368,53670559744,53671051264,53666627584,53666668544,53661663232,53662580736,53665488896,53660639232,53659131904,53659164672,53659303936,53659320320,53657477120,53659648000,53659811840,53652275200,53656903680,53654577152,53655158784,53655224320,53644967936,53645017088,53646393344,53659140096,53657124864,53653741568,53687164928,53686673408,53687025664,53678415872,53678047232,53666119680,53666398208,53677965312,53676744704,53675417600,53666603008,53663580160,53658632192,53651128320,53647441920,53646204928,53638324224,53644140544,53669003264,53661925376,53656379392,53652889600,53649711104,53649235968,53651709952,53653282816,53649432576,53648293888,53644247040,53638242304,53645131776,53662998528,53655543808,53652742144,53657305088,53659672576,53669142528,53663449088,53669068800,53672615936,53675294720,53677457408,53680128000,53681471488,53681872896,53681750016,53679030272,53678555136,53679144960,53672697856,53678850048,53680865280,53678899200,53673402368,53677785088,53675261952,53677293568,53674467328,53677572096,53670076416,53672411136,53664358400],"colour":"42, 94, 157"}],"chart":"memory"};</script><div
+        id="chart--memory"
+        height="66"
+        class="js-chart"
+        data-chart-type="line"
+        data-chart-source="memoryChartData"
+        data-chart-colour-opacity="1"
+        data-chart-vertical-gridlines="false"
+        data-chart-horizontal-gridlines="false"
+        data-chart-legend="false"
+        data-chart-horizontal-axis="false"
+        data-chart-vertical-axis="false"
+        data-chart-animation="false"
+        data-chart-point-radius="0"
+        data-chart-tooltips="false"
+    ></div>                    </div>
+                </div>
+
+                <div class="grid__col grid__col--span-2-of-12 grid__col--span-3-of-12--medium">
+                    <div class="padded-h--tight">
+                        <p class="zeta color--white spaced-bottom--none">Disk I/O</p>
+                        <script>var diskChartData = {"labels":[1605451196252,1605451676296,1605452186406,1605452696467,1605453176482,1605453686496,1605454196528,1605454676557,1605455186573,1605455696603,1605456176618,1605456686664,1605457196695,1605457676708,1605458186724,1605458667816,1605459177847,1605459688643,1605460168986,1605460679141,1605461189172,1605461669186,1605462179482,1605462689497,1605463169637,1605463679933,1605464189964,1605464669994,1605465180197,1605465660491,1605466171272,1605466681770,1605467161971,1605467671984,1605468182030,1605468662184,1605469172213,1605469682243,1605470162256,1605470672536,1605471153112,1605471663126,1605472174156,1605472654169,1605473164808,1605473674822,1605474154835,1605474664896,1605475174943,1605475654955,1605476165828,1605476645966,1605477156293,1605477666308,1605478146321,1605478656475,1605479166489,1605479646502,1605480156517,1605480666671,1605481147059,1605481657214,1605482167338,1605482647476,1605483157490,1605483637503,1605484147549,1605484657563,1605485138107,1605485648699,1605486158932,1605486639071,1605487149085,1605487659099,1605488139112,1605488649157,1605489130469,1605489640513,1605490150527,1605490630759,1605491140945,1605491651883,1605492131925,1605492642236,1605493152250,1605493632311,1605494143803,1605494623838,1605495133868,1605495643975,1605496125036,1605496635066,1605497145126,1605497625140,1605498135154,1605498645652,1605499125822,1605499635898,1605500118115,1605500628144,1605501138221,1605501618234,1605502129076,1605502639778,1605503119791,1605503630180,1605504140194,1605504621070,1605505132066,1605505612141,1605506122236,1605506634638,1605507114736,1605507624775,1605508063882,1605508625818,1605509107160,1605509617175,1605510112269,1605510622283,1605511133341,1605511614168,1605512106541,1605512617507,1605513127521,1605513607582,1605514118642,1605514599124,1605515109185,1605515619214,1605516099228,1605516609246,1605517119271,1605517599441,1605518109472,1605518619502,1605518950795,1605519601621,1605520111636,1605520591649,1605521103666,1605521613800,1605522094156,1605522604378,1605523114750,1605523594947,1605524105767,1605524615967,1605525097297,1605525607881,1605526089133,1605526599351,1605527109624,1605527589679,1605528099817,1605528610103,1605529091368,1605529601401,1605530081432,1605530591759,1605531101807,1605531581916,1605532091977,1605532602681,1605533083478,1605533594633,1605534075574,1605534585631,1605535095743,1605535575836,1605536085881,1605536595897,1605537075926,1605537586021],"dataSets":[{"label":"","data":[1378161.3605206334,1072249.8161532483,1034307.4359559419,1357716.4523817946,994043.0093618484,1334529.2366105127,1210891.4444999602,1306264.4283000983,3544425.653168314,1173177.5389073621,1531276.3004548473,1402745.6755836038,2096277.5768858795,4076014.3458733014,1410854.706515264,1491332.4776375273,959730.7226275177,1062134.999416582,4253055.953102033,1141973.6595674583,1022877.3195025225,1323717.9458741464,1007921.965265673,1089501.0943941674,990182.6773644765,3493285.991916104,1524132.3292908883,1059280.2952075491,3425252.206271609,1182898.5131060597,3739545.8240597844,3654224.063115042,3592302.0788739007,3836974.4551791186,1072799.192796634,1000011.5658803578,862897.6656604378,844722.8079913999,3490169.5192523357,1397737.4743697662,1696594.5926603365,1244707.4417381375,902109.5725220715,1191451.2280616418,1576863.2850567577,1216054.6765975598,1104706.532808247,4076438.359009383,5057859.764495688,2919854.464844983,4016644.3334755767,1434253.2473513563,971270.4106712468,2105966.9744780464,6491020.628585806,1349969.0646567307,1073548.5887338181,1179309.1771990324,1277157.7647042722,1177098.2999770474,1142969.0173845156,1009480.8929109552,4260511.70488896,1289244.7262582514,4144606.163957724,1351658.5072457732,1126774.8306583709,1080766.028409656,1856659.5255021956,3640345.963814446,1106145.7169765634,1627353.5743886323,1510146.5745252492,1332670.1955122564,1079283.2575376455,1109622.428988698,1066909.4523217957,8604698.494565686,1594638.1785417027,1363085.9396451216,1195400.5785850205,1199071.1844113641,4055245.405328108,1236454.7861371394,1244547.558657163,2525029.2426894233,2353852.9722538237,1199959.4105910996,2080695.023244399,1374571.994713548,1185833.416474472,3640904.857365068,946159.3703492583,1745518.2114739462,1581644.9672883467,5975570.929923633,1881817.4965639939,3881316.602571811,891440.5831811499,1134565.7231454498,1882884.4880544073,1366425.0235790857,1424701.94229458,3982319.416911992,2038620.2398612122,1952224.3723842935,2529475.2192981876,3213332.200713971,2710958.3828458297,1104234.1361845536,1484662.5417723523,32418500.173473455,55841502.98751636,110875432.411751,86179056.12223607,27952529.245132606,6794459.215149038,3779419.4124484826,5182364.461940981,20768223.95943568,35509567.8469785,38543070.66814356,50087631.36811156,41783951.539731815,43476165.74628237,32873956.150349826,36444044.82665012,18415019.982670352,2676991.3464932903,2937993.3027602267,3060317.80691373,5980660.048089217,4012940.2625085455,4810472.098333731,9246013.856011875,7499011.014151949,3955970.9571816986,5089883.069177522,2160342.5137575,3810301.6473682383,4128908.8644028977,3964805.3948592287,2770467.1681887656,1866182.954727968,2618585.5185229722,5703428.517610772,2543159.0576245696,4618526.947744352,5151328.833176994,2886782.8071900653,2437225.4148438834,2010445.958447168,1646174.715624913,1738530.8261645723,2016669.5982449418,2116000.476070351,2032759.4866801305,4093820.5221416876,1523305.1066268494,1918703.0466914305,4092023.158953729,2058803.473135627,4084296.622857887,1671897.5092466618,4209640.084115811,2487076.6578889713,1826628.3153749027,4603359.95637528,2963402.6356401076,7110987.835833695,2300488.3455531183,2077297.3287507854,4840279.652496412,3331992.467062096],"colour":"42, 94, 157"}],"chart":"disk"};</script><div
+        id="chart--disk"
+        height="66"
+        class="js-chart"
+        data-chart-type="line"
+        data-chart-source="diskChartData"
+        data-chart-colour-opacity="1"
+        data-chart-vertical-gridlines="false"
+        data-chart-horizontal-gridlines="false"
+        data-chart-legend="false"
+        data-chart-horizontal-axis="false"
+        data-chart-vertical-axis="false"
+        data-chart-animation="false"
+        data-chart-point-radius="0"
+        data-chart-tooltips="false"
+    ></div>                    </div>
+                </div>
+
+                <div class="grid__col grid__col--span-2-of-12 grid__col--span-3-of-12--medium">
+                    <div class="padded-h--tight">
+                        <p class="zeta color--white spaced-bottom--none">Waits</p>
+                        <script>var waitsChartData = {"labels":[1605451126613,1605451607380,1605452087393,1605452687453,1605453167720,1605453647737,1605454127893,1605454608923,1605455088970,1605455688937,1605456169047,1605456649203,1605457129203,1605457609220,1605458089487,1605458689513,1605459170407,1605459650437,1605460130923,1605460611157,1605461091220,1605461691420,1605462171373,1605462652577,1605463132203,1605463612330,1605464092390,1605464572283,1605465172437,1605465652467,1605466132513,1605466612513,1605467092517,1605467572530,1605468172560,1605468652560,1605469133060,1605469612577,1605470092593,1605470572670,1605471172700,1605471653713,1605472133217,1605472612717,1605473092763,1605473572750,1605474172853,1605474653293,1605475133293,1605475612793,1605476092903,1605476572857,1605477172883,1605477653167,1605478133230,1605478613480,1605479093450,1605479573560,1605480053480,1605480653493,1605481133510,1605481613493,1605482093637,1605482573557,1605483053620,1605483654363,1605484134397,1605484614430,1605485094963,1605485574493,1605486054650,1605486654650,1605487134600,1605487615150,1605488094993,1605488574837,1605489054807,1605489654740,1605490134693,1605490614740,1605491095693,1605491575710,1605492055773,1605492655757,1605493135770,1605493615770,1605494095773,1605494575850,1605495056257,1605495535837,1605496135990,1605496615987,1605497096483,1605497576567,1605498056490,1605498536617,1605499136677,1605499616737,1605500097347,1605500576880,1605501056897,1605501536740,1605502136830,1605502617707,1605503097127,1605503577160,1605504057143,1605504537270,1605505137313,1605505617843,1605506098877,1605506579563,1605507059750,1605507539393,1605508021707,1605508536533,1605509016470,1605509616560,1605510096763,1605510577030,1605511057123,1605511536873,1605512074700,1605512554727,1605513037683,1605513514953,1605514115857,1605514595247,1605515076183,1605515556717,1605516036153,1605516516090,1605517116213,1605517596323,1605518076417,1605518556777,1605519073680,1605519572397,1605520052557,1605520532247,1605521012900,1605521612087,1605522091930,1605522572370,1605523052290,1605523532523,1605524012353,1605524612507,1605525093227,1605525573930,1605526053303,1605526533367,1605527013383,1605527493463,1605528093380,1605528573413,1605529054223,1605529534257,1605530014257,1605530494367,1605531094707,1605531574787,1605532055490,1605532535617,1605533015820,1605533495833,1605534095910,1605534575800,1605535056223,1605535535880,1605536016380,1605536496490,1605537097360,1605537577410],"dataSets":[{"label":"","data":[9.09963084238847,18.08984393687587,12.978815157089496,6.0793920607939205,7.023176691298798,32.036365378726174,10.623630653370988,67.43030580213292,27.270246455034606,5.031943423554962,27.679073545645785,6.387507393430469,13.077083333333333,5.264396885943623,28.240541198958088,16.234296513817736,3.865716769184061,14.6553340416224,13.634112128136927,10.884277248174847,7.151144745585476,17.640786404531823,22.76264550903943,13.081769893849591,9.117520734905948,16.76848000633166,1.8289380494104903,16.73914810176435,18.020374770475577,36.08316146907485,20.689683905292412,108.04791666666667,23.916467362771975,13.162143525279523,3.4114960918620736,8.2875,4.255983350676379,21.148363874482033,21.443035232158923,5.928215682067668,31.623418829058547,14.766752665728372,16.729787447028595,19.017726798748697,15.656832886848344,34.173842208226475,17.027077018445166,16.235117808675383,7.575,22.212721584984354,39.109787340401155,25.085737383165885,3.134864155886578,26.203246412539247,34.466309630194374,4.668401874023945,25.512011167364626,23.128033159067712,29.190281713618933,34.740913946864474,11.039192361937182,31.667788234166625,54.246226132160345,14.535755959326554,32.368668278955056,19.51749749893049,4.180953849102355,13.12409771828187,44.10935357197112,25.374846203574332,18.66056310748359,38.22166666666667,41.520991769976035,33.028821142440954,14.546424559699734,17.499437317128066,6.910848594703834,26.33960792288472,17.553802143126518,12.546688136786607,25.636600665761524,26.024078313893046,57.979890139419204,28.835768953838762,40.12183003376992,134.43541666666667,20.108207657035482,44.49702860166182,67.78210975277213,8.021602235289212,22.88083205449277,44.196109559018076,33.038776597515906,37.27472692278852,43.87162107254705,49.4327542504379,73.7842882378429,20.55368078990126,11.699714945589978,17.156274959179033,55.1438803209053,20.560891791690196,41.73040710560083,288.7224799688901,71.29865253848399,67.90158176625357,30.280239091801167,32.90379420445007,20.56519282784734,29.18652321395126,25.183251079965242,138.88692410430093,169.6110057123579,68.94294298050843,98.63906086076706,318.416319300113,73.14084973652791,68.84967254911763,85.01821104824418,42.65335740327776,79.84911256777333,51.96456487754039,142.64438192950522,250.56298916519282,206.5032839430507,401.7998198084942,93.63725320517086,216.46258787208743,57.56483191110668,34.80711042298776,64.41944284534327,145.64619939700418,102.57230601060115,58.82610235154444,124.45062841860137,130.3147639270547,82.48162614649169,48.662868921652965,86.31289570143284,139.05855865246303,119.00060958737384,63.068791545878,60.05505967576896,36.601864957122636,85.51841973662276,77.34787072108747,113.2442740137132,194.67003469109594,119.1150773839241,97.22427361593333,177.44428659937043,97.64114784695374,202.30367321089298,46.785952341276456,73.14345151079233,25.883637166611464,32.57627753166532,15.55723136277847,61.8375,60.19037303951178,73.41506479661525,27.612064655890684,82.13387476258728,58.507436574073104,32.13016161914857,23.038959361517293,58.56748383957392,54.643772531205066,43.56577432804008,72.83746510527314,72.69927159209156,75.37022765616211,121.99310999051373,73.58400166649308],"colour":"42, 94, 157"}],"chart":"waits"};</script><div
+        id="chart--waits"
+        height="66"
+        class="js-chart"
+        data-chart-type="line"
+        data-chart-source="waitsChartData"
+        data-chart-colour-opacity="1"
+        data-chart-vertical-gridlines="false"
+        data-chart-horizontal-gridlines="false"
+        data-chart-legend="false"
+        data-chart-horizontal-axis="false"
+        data-chart-vertical-axis="false"
+        data-chart-animation="false"
+        data-chart-point-radius="0"
+        data-chart-tooltips="false"
+    ></div>                    </div>
+                </div>
+
+                <div class="grid__col grid__col--span-2-of-12 grid__col--span-12-of-12--medium text--right flex flex-align--center flex-justify--end">Take a peek into our servers</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="band background-color--blue--8 color--white footer__menu">
+        <div class="band__inner-container padded-v--loose padded-h--tight grid flex">
+            <div class="grid__col grid__col--span-9-of-12 grid__col--span-12-of-12--medium flex flex-align--center">
+                <ul id="menu-footer-menu" class="list--horizontal spaced-bottom--none"><li id="menu-item-22" class="menu-item menu-item-type-post_type menu-item-object-page spaced-bottom--none spaced-right menu-item-22 spaced-bottom--none spaced-right--tight"><a href="https://www.sqlservercentral.com/about">About SQLServerCentral</a></li>
+<li id="menu-item-3673197" class="menu-item menu-item-type-post_type menu-item-object-page spaced-bottom--none spaced-right menu-item-3673197 spaced-bottom--none spaced-right--tight"><a href="https://www.sqlservercentral.com/contact-us">Contact Us</a></li>
+<li id="menu-item-24" class="menu-item menu-item-type-post_type menu-item-object-page spaced-bottom--none spaced-right menu-item-24 spaced-bottom--none spaced-right--tight"><a href="https://www.sqlservercentral.com/terms">Terms of Use</a></li>
+<li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page spaced-bottom--none spaced-right menu-item-26 spaced-bottom--none spaced-right--tight"><a href="https://www.sqlservercentral.com/privacy">Privacy Policy</a></li>
+<li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page spaced-bottom--none spaced-right menu-item-28 spaced-bottom--none spaced-right--tight"><a href="https://www.sqlservercentral.com/contribute">Contribute</a></li>
+<li id="menu-item-30" class="menu-item menu-item-type-post_type menu-item-object-page spaced-bottom--none spaced-right menu-item-30 spaced-bottom--none spaced-right--tight"><a href="https://www.sqlservercentral.com/contributors">Contributors</a></li>
+<li id="menu-item-3425913" class="menu-item menu-item-type-post_type menu-item-object-page spaced-bottom--none spaced-right menu-item-3425913 spaced-bottom--none spaced-right--tight"><a href="https://www.sqlservercentral.com/author">Authors</a></li>
+<li id="menu-item-3426090" class="menu-item menu-item-type-post_type menu-item-object-page spaced-bottom--none spaced-right menu-item-3426090 spaced-bottom--none spaced-right--tight"><a href="https://www.sqlservercentral.com/newsletter-archive">Newsletters</a></li>
+</ul>            </div>
+
+            <div class="grid__col grid__col--span-2-of-12 grid__col--push-1-of-12 grid__col--span-12-of-12--medium grid__col--push-0-of-12--medium flex flex-align--center flex-justify--end">
+                <a href="https://www.red-gate.com/" target="_blank" class="link-image"><img src="https://www.sqlservercentral.com/wp-content/themes/ssc-twentyeighteen/images/footer/redgate.svg" alt=""/></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- / FOOTER -->
+
+<script type='text/javascript'>
+/* <![CDATA[ */
+var ssc_utilities_ajax_combined_data = {"ajax_url":"https:\/\/www.sqlservercentral.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' defer src='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-utilities/js/ajax-combined.min.js?ver=2020-06-03'></script>
+<script type='text/javascript' defer src='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-performance/js/ssc-lazy-load.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var ssc_related_forum_topics_top_comments_data = {"ajax_url":"https:\/\/www.sqlservercentral.com\/wp-admin\/admin-ajax.php","post_id":"3797071"};
+/* ]]> */
+</script>
+<script type='text/javascript' defer src='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-related-forum-topics/js/top-comments.min.js?ver=2020-06-03'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var ssc_star_ratings_data = {"ajax_url":"https:\/\/www.sqlservercentral.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' defer src='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-star-ratings/js/interactive.min.js?ver=2020-06-03'></script>
+<script type='text/javascript' defer src='https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=sql&#038;lang=vb'></script>
+<script type='text/javascript' defer src='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-syntax-highlighting/inc/lexers/lang-vs.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var ssc_visitor_counter_data = {"ajax_url":"https:\/\/www.sqlservercentral.com\/wp-admin\/admin-ajax.php","post_id":"3797071","is_singular":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' defer src='https://www.sqlservercentral.com/wp-content/mu-plugins/ssc/ssc-visitor-counter/js/ssc-visitor-counter.min.js?ver=2020-06-03'></script>
+<script type='text/javascript' defer src='https://www.sqlservercentral.com/wp-content/plugins/bbpress/templates/default/js/editor.js?ver=2.5.14-6684'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var SSC2018 = {"templateUrl":"https:\/\/www.sqlservercentral.com\/wp-content\/themes\/ssc-twentyeighteen"};
+/* ]]> */
+</script>
+<script type='text/javascript' defer src='https://www.sqlservercentral.com/wp-content/themes/ssc-twentyeighteen/js/sqlservercentral.min.js?ver=2020-06-03'></script>
+<script type='text/javascript' defer src='https://www.sqlservercentral.com/wp-content/plugins/gd-bbpress-attachments/js/front.js?ver=3.1_b2302_free'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var newsletter = {"messages":{"email_error":"Email address is not correct","name_error":"Name is required","surname_error":"Last name is required","privacy_error":"You must accept the privacy policy"},"profile_max":"20"};
+/* ]]> */
+</script>
+<script type='text/javascript' defer src='https://www.sqlservercentral.com/wp-content/plugins/newsletter/subscription/validate.js?ver=5.8.9'></script>
+<script type='text/javascript' src='https://www.sqlservercentral.com/wp-includes/js/wp-embed.min.js?ver=5.1.1'></script>
+
+</body>
+</html>
+
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Page Caching using redis 
+
+Served from: sqlservercentral.com @ 2020-11-16 16:26:47 by W3 Total Cache
+-->
